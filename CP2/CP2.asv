@@ -44,18 +44,18 @@ end
 %%% but now you want to break out of the loop when the sum surpasses 10
 %%% for A7 and A8, and 20 for A9 and A10
 %%% (very similar to Week 2 Lecture 2 Fibonacci)
-A7 = 0;
+A7 = 1;
 A8 = 0;
 while A8 <= 10
-    A7 = A7 + 1;
     A8 = A8 + 1 / A7;
+    A7 = A7 + 1;
 end
 
-A9 = 0;
+A9 = 1;
 A10 = 0;
-while A10 <= 20
-    A9 = A9 + 1;
+while A10 <= 10
     A10 = A10 + 1 / A9;
+    A9 = A9 + 1;
 end
 
 %%% Problem 3
@@ -77,22 +77,25 @@ N = 100;
 %%% Write the code for A11 and A12 here
 A11 = logistic_map(r, x0, N);
 plot(1:1:100, A11);
-behavior = 1;
-A12 = [std(A11), behavior];
+behavior = 2;
+x_std = std(A11);
+A12 = [behavior, x_std];
 
 %%% Do the same as above except for A13 and A14
 r = 3.25;
 A13 = logistic_map(r, x0, N);
 plot(1:1:100, A13);
 behavior = 2;
-A14 = [std(A13), behavior];
+x_std = std(A13);
+A14 = [behavior, x_std];
 
 %%% Do the same as above except for A15 and A16
 r = 3.75;
 A15 = logistic_map(r, x0, N);
 plot(1:1:100, A15);
-behavior = 3;
-A16 = [std(A15), behavior];
+behavior = 2;
+x_std = std(A15);
+A16 = [behavior, x_std];
 
 
 %%% Create a function here (Week 2 Lecture 3).  The function will take r, 
