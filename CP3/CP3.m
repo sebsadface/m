@@ -33,14 +33,16 @@ A3 = L \ (P * b);
 %%% Create a loop that breaks when one of the forces is greater than 20 tons
 %%% Save A4 as the weight of the truck in position 8
 %%% Save A5 as the entry of the force vector that exceeds 20 tons
-A5 = 0;
 x = A1;
+A5 = 1;
 while max(abs(x)) <= 20
-    A5 = A5 + 1;
     b(9) = b(9) + 0.001;
     x = U \ (L \ (P * b));
 end
 A4 = b(9);
+while abs(x(A5)) <= 20
+    A5 = A5 + 1;
+end
 
 
 %%% Problem 2
@@ -101,12 +103,12 @@ A9 = A9 - 1;
 %%% After you make your function come back to this line.
 %%% Save A11 as R(pi/8)
 %%% Rotate the vector given in the assignment file and save it as A12.
-A11 = getR(pi/8);
-
+A11 = getR(pi / 8);
+A12 = getR(pi / 3) * [pi / 10; 2.1; -exp(1)];
 
 %%% Find the vector x that was rotated to give you vector b.
 %%% Save the vector x as A13
-
+A13 = getR(pi / 6) \ [1.4; -pi / 10; 2.8];
 
 
 
@@ -116,11 +118,8 @@ A11 = getR(pi/8);
 %%% Find the angle theta that would give you this inverse
 %%% without having to do matrix operations, and save the angle
 %%% as A15.
-
-
-
-
-
+A14 = inv(getR(3 * pi / 4));
+A15 = -3 * pi / 4;
 
 %%% Create a function here for the rotation matrix that
 %%% takes an input in radians and outputs the matrix.
