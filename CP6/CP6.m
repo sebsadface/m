@@ -6,8 +6,8 @@ pop = data(2, :);
 %%% Don't delete the lines above when submitting to gradescope
 
 %%% Replace the value of the population for the years given in the assignment file and save it as A1
-pop(1956-1946) = 34;
-pop(1974-1946) = 27;
+pop(1956-1946+1) = 34;
+pop(1974-1946+1) = 27;
 A1 = pop;
 
 %%% Calculate the value of the cubic spline interpolation of the data at t = 24.5 using the interp1 function.  Save this as A2.
