@@ -42,14 +42,14 @@ A12 = norm(exp(coeffs(1) * t + coeffs(2)) + 260 - co2);
 %%% Fit the sinusoidal
 %%% There are a few different ways to do this, and we will refrain from giving away the answer to this part.  The class has been doing loops for a while now, so this part should be doable, albeit a little tricky.  We can however check to see if there are any bugs that we can spot.
 amp = 0;
-amp_max = -1;
-amp_min = 1;
+amps = zeros(1,12);
 for i = 1:62
     for j = 1:12
-        amp_max = max(amp_max, co2(12 * (i - 1) + j)- (exp(coeffs(2)) * exp(coeffs(1) * t(12 * (i - 1) + j)) + 260));
-        amp_min = min(amp_min, co2(12 * (i - 1) + j)- (exp(coeffs(2)) * exp(coeffs(1) * t(12 * (i - 1) + j)) + 260));
+        amps(j) = co2(12*(i-1)+j) - (exp(coeffs(1) * t(12*(i-1)+j) + coeffs(2)) + 260);
     end
-    amp = amp + (amp_max - amp_min) / 2;
+    amp = amp+(max(amps) - min(amps)) / 2;
 end
-A13 = [amp / 62, 12];
-A14 = norm(exp(coeffs(1) * t + coeffs(2)) + 260 - co2)
+A = amp / 62;
+A13 = [A , 2*pi];
+A14 = norm((exp(coeffs(1) * t + coeffs(2)) + 260 + A * sin((2*pi) * t)) - co2);
+plot(t, co2, 'ko', t,(exp(coeffs(1) * t + coeffs(2)) + 260 + A * sin((2*pi) * t)), 'linewidth',1, 'markersize', 4)
