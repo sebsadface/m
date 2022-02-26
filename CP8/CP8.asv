@@ -81,7 +81,6 @@ A9 = A8 / max(abs(z - x_true(t)));
 %%% loop.
 %%% The forward Euler scheme is the predictor.  The answer from forward
 %%% Euler will be plugged into the sin(x_n+1) in the backward Euler scheme.
-a = 8;
 dt = 0.01;
 T = 2;
 t = 0 :dt:T;
@@ -90,9 +89,10 @@ x0 = pi/4;
 A10 = zeros(1,n);
 A10(1) = x0;
 for k = 1:n-1
-    
+    A10(k+1) = A10(k) + dt * a * sin(A10(k) + dt*(a * sin(A10(k))));
 end
 
+A11 = max(abs(A10 - x_true(t)));
 
 %%% Predictor-Corrector dt = 0.001
 %%% Reinitialize t and x_true
@@ -100,16 +100,32 @@ end
 %%% loop.
 %%% The forward Euler scheme is the predictor.  The answer from forward
 %%% Euler will be plugged into the sin(x_n+1) in the backward Euler scheme.
-
-
-
-
+dt = 0.001;
+T = 2;
+t = 0 :dt:T;
+n = length(t);
+x0 = pi/4;
+z = zeros(1,n);
+z(1) = x0;
+for k = 1:n-1
+    z(k+1) = z(k) + dt * a * sin(z(k) + dt*(a * sin(z(k))));
+end
+A12 = A11 / max(abs(z - x_true(t)));
 
 %%% Builtin Solver
 %%% Reinitialize t and x_true
 %%% Use ode45 to solve the ODE.
 %%% Don't forget to transpose the solution you get from ode45.
-
+dt = 0.01;
+T = 2;
+t = 0 :dt:T;
+n = length(t);
+x0 = pi/4;
+f = @(t, x)(cos(t) - x);
+tspan = [0:0.1:10];
+[tee, x] = ode45(f, tspan, x0);
+A5 = x';
+A6 = abs(A5 - x_true(t));
 
 
 
