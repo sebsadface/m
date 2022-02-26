@@ -90,10 +90,9 @@ x0 = pi/4;
 A10 = zeros(1,n);
 A10(1) = x0;
 for k = 1:n-1
-    A10(k+1) = A10(k) + dt * a * sin(A7(k+1));
+    
 end
 
-A11 = max(abs(A10 - x_true(t)));
 
 %%% Predictor-Corrector dt = 0.001
 %%% Reinitialize t and x_true
