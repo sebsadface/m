@@ -1,2 +1,2 @@
-# prog_matlab
+# m
 MATLAB projects
